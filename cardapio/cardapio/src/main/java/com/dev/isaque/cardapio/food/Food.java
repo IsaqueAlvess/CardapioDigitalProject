@@ -5,6 +5,10 @@
 package com.dev.isaque.cardapio.food;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 /**
  *
@@ -12,6 +16,10 @@ import jakarta.persistence.*;
  */
 @Table(name = "foods")
 @Entity(name = "foods")
+@Getter                         //criação via Lombok
+@NoArgsConstructor              //criação via Lombok
+@AllArgsConstructor             //criação via Lombok
+@EqualsAndHashCode(of = "id")   //id é a representação única da classe Food
 public class Food {
     
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,4 +27,10 @@ public class Food {
     private String title;
     private String image;
     private Integer price;
+
+    public Food(FoodRequestDTO data){
+        this.image = data.image();
+        this.price = data.price();
+        this.title = data.title();
+    }
 }
